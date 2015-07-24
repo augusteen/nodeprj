@@ -4,7 +4,9 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
     session = require('express-session'),
-    env = require('./env/development');
+    env = require('./env/development'),
+    mysql = require('mysql'),
+    connection = require('express-myconnection');
 
 module.exports = function() {
     var app = express();
@@ -26,8 +28,18 @@ module.exports = function() {
     app.use(session({
         saveUninitialized: true,
         resave: true,
-        secret:  env.sessionSecret //'SecrectCookie'
+        secret: env.sessionSecret //'SecrectCookie'
     }));
+
+    app.use(
+        connection(mysql, {
+            host: 'localhost',
+            user: 'nodejs',
+            password: 'Vistaar123',
+            port: 3306, //port mysql
+            database: 'test'
+        }, 'request')
+    );
 
     app.set('views', './app/views');
 

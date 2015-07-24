@@ -14,7 +14,25 @@ js"></script>
 <script type="text/javascript" src="/lib/angular-route/angular-route.js"></script>
 <script type="text/javascript" src="/example/controllers/example.
 client.controller.js"></script>
+
+
 <section ng-include="'example/views/example.client.view.html'"></section>
+
+<% if(data.length){ 
+                                
+     for(var i = 0;i < data.length;i++) { %>                 
+    <tr>
+        <td><%=(i+1)%></td>
+        <td><%=data[i].firstname%></td>
+        <td><%=data[i].lastname%></td>
+    </tr>
+<% }
+
+ }else{ %>
+     <tr>
+        <td colspan="3">No user</td>
+     </tr>
+<% } %>
 
 <!--
 <section>

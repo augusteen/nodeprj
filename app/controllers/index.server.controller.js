@@ -5,7 +5,19 @@ exports.render = function(req, res) {
     }
     req.session.lastVisit = new Date();
     
-    res.render('index', {
-        title: 'Node js first app'
+    // res.render('index', {
+    //     title: 'Node js first app'
+    // });
+    
+    req.getConnection(function(err,connection){
+    	connection.query('select * from users',function(err,rows){
+	    	if(err){
+	    		console.log('Error ',err);
+	    		res.render('index',{
+	    			title:'Fetch from mysql',
+	    			data:rows
+	    		});
+	    	}
+    	});
     });
 };
