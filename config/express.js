@@ -34,7 +34,7 @@ module.exports = function() {
     }));
 
 
-    connection = mysql.createConnnection({
+    connection = mysql.createConnection({
         host:'localhost',
         user:'nodejs',
         password:'Vistaar123',

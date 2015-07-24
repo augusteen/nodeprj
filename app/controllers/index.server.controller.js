@@ -5,11 +5,14 @@ exports.render = function(req, res) {
     }
     req.session.lastVisit = new Date();
 
-    res.render('index', {
-        title: 'Node js first app'
-    });
 
-
+   var mysql = require('mysql');
+   var connection = mysql.createConnection({
+        host:'localhost',
+        user:'nodejs',
+        password:'Vistaar123',
+        database:'test'	
+   });
     console.log('Reached renderer');
     try {
 
@@ -18,6 +21,10 @@ exports.render = function(req, res) {
             if (err) throw err;
             console.log('Name is ', rows[0].firstname);
 
+    res.render('index', {
+        title: 'Node js first app',
+        data:rows
+    });
         });
 
         connection.end();
@@ -27,8 +34,11 @@ exports.render = function(req, res) {
     }
 
 
+    /*res.render('index', {
+        title: 'Node js first app'
+    });/*
 
-    /*    req.getConnection(function(err,connection){
+        /*req.getConnection(function(err,connection){
         	connection.query('select * from users',function(err,rows){
     	    	if(err){
     	    		console.log('Error ',err);
