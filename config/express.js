@@ -5,8 +5,10 @@ var express = require('express'),
     methodOverride = require('method-override'),
     session = require('express-session'),
     env = require('./env/development'),
-    mysql = require('mysql'),
-    connection = require('express-myconnection');
+    mysql = require('mysql');
+    //connection = require('express-myconnection');
+
+var connection;
 
 module.exports = function() {
     var app = express();
@@ -31,7 +33,15 @@ module.exports = function() {
         secret: env.sessionSecret //'SecrectCookie'
     }));
 
-    app.use(
+
+    connection = mysql.createConnnection({
+        host:'localhost',
+        user:'nodejs',
+        password:'Vistaar123',
+        database:'test'
+    });
+
+    /*app.use(
         connection(mysql, {
             host: 'localhost',
             user: 'nodejs',
@@ -40,7 +50,7 @@ module.exports = function() {
             database: 'test'
         }, 'request')
     );
-
+*/
     app.set('views', './app/views');
 
     app.set('view engine', 'ejs');
