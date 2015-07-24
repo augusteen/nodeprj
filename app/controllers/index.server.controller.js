@@ -5,12 +5,26 @@ exports.render = function(req, res) {
     }
     req.session.lastVisit = new Date();
     
-    // res.render('index', {
-    //     title: 'Node js first app'
-    // });
+     res.render('index', {
+         title: 'Node js first app'
+    });
     
+
     console.log('Reached renderer');
-    req.getConnection(function(err,connection){
+   try{
+   connection.query('select * from users',function(err,rows,fields){
+	if(err) throw err;
+        console.log('Name is ',rows[0].firstname);
+
+  });
+}catch(err){
+      console.log(err);
+
+}
+
+	
+
+/*    req.getConnection(function(err,connection){
     	connection.query('select * from users',function(err,rows){
 	    	if(err){
 	    		console.log('Error ',err);
@@ -20,5 +34,5 @@ exports.render = function(req, res) {
 	    		});
 	    	}
     	});
-    });
+    }); */
 };
