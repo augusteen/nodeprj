@@ -9,6 +9,7 @@ exports.render = function(req, res) {
     //     title: 'Node js first app'
     // });
     
+    console.log('Reached renderer');
     req.getConnection(function(err,connection){
     	connection.query('select * from users',function(err,rows){
 	    	if(err){
